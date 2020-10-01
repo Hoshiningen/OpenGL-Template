@@ -1,0 +1,33 @@
+include(FetchContent)
+
+macro(LinkGLFW TARGET ACCESS)
+    FetchContent_Declare(
+        glfw
+        GIT_REPOSITORY https://github.com/glfw/glfw
+        GIT_TAG 3.3.2
+    )
+
+    FetchContent_GetProperties(glfw)
+
+    if (NOT glfw_POPULATED)
+        FetchContent_Populate(glfw)
+
+        # Just configure GLFW only
+        set(GLFW_BUILD_EXAMPLES OFF)
+        set(GLFW_BUILD_TESTS OFF)
+        set(GLFW_BUILD_DOCS OFF)
+        set(GLFW_INSTALL OFF)
+
+        # This excludes glfw from being rebuilt when ALL_BUILD is built
+        # it will only be built when a target is built that has a dependency on glfw
+        add_subdirectory(${glfw_SOURCE_DIR} ${glfw_BINARY_DIR} EXCLUDE_FROM_ALL)
+
+        # Set the target's folders
+        set_target_properties(glfw PROPERTIES FOLDER ${PROJECT_NAME}/thirdparty)
+    endif()
+
+    target_include_directories(${TARGET} ${ACCESS} ${glfw_SOURCE_DIR}/include)
+    target_link_libraries(${TARGET} ${ACCESS} glfw)
+
+    add_dependencies(${TARGET} glfw)
+endmacro()
