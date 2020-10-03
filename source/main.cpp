@@ -45,7 +45,7 @@ int main()
         ProcessInput(window);
 
         // Druids are the best
-        glClearColor(1.00, 0.49, 0.04, 1.00);
+        glClearColor(1.00f, 0.49f, 0.04f, 1.00f);
         glClear(GL_COLOR_BUFFER_BIT);
 
         glfwSwapBuffers(window);
