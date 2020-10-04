@@ -1,4 +1,8 @@
-# OpenGL Template
+<div align="center">
+<img src="images/OpenGLTemplateLogo.png">
+</div>
+
+<br>
 
 This repository is a template OpenGL project configured using CMake. It supports cross-platform builds, and provides a good starting point to begin OpenGL development.
 
